@@ -95,7 +95,7 @@ const ducks = [
         name: 'John',
         imgUrl: 'https://images.unsplash.com/photo-1554453954-3bca4671e5b9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80'
     }
-]
+];
 
 // 8 ducks
 // 5 male
@@ -133,10 +133,58 @@ const cardMaker = (divName, arr) => {
     printToDom(divName, domStr);
 };
 
+// RUBBER / REAL FILTER
+
+// COLOR FILTER
+const choseColor = (e) => {
+    const buttonId = e.target.id;
+    const selectedDucks = [];
+    for (let i = 0; i < ducks.length; i++) {
+        if (ducks[i].color === buttonId) {
+            selectedDucks.push(ducks[i]);
+        }
+    }
+    cardMaker('cardContainer', selectedDucks);
+};
+
+// GENDER FILTER
+const choseGender = (e) => {
+    const buttonId = e.target.id;
+    const selectedDucks = [];
+    for (let i = 0; i < ducks.length; i++) {
+        if (ducks[i].gender === buttonId) {
+            selectedDucks.push(ducks[i]);
+        }
+    }
+    cardMaker('cardContainer', selectedDucks);
+};
+
+// RUBBER FILTER
+const choseRubber = (e) => {
+    const selectedDucks = [];
+    for (let i = 0; i < ducks.length; i++) {
+        if (ducks[i].isRubber) {
+            selectedDucks.push(ducks[i]);
+        }
+    }
+    cardMaker('cardContainer', selectedDucks);
+};
+
+const events = () => {
+    document.getElementById('blue').addEventListener('click', choseColor);
+    document.getElementById('yellow').addEventListener('click', choseColor);
+    document.getElementById('white').addEventListener('click', choseColor);
+    document.getElementById('male').addEventListener('click', choseGender);
+    document.getElementById('female').addEventListener('click', choseGender);
+    document.getElementById('rubber').addEventListener('click', choseRubber);
+};
+
 
 // INIT FUNC - WHEN PAGE LOADS
 const init = () => {
     cardMaker('cardContainer', ducks);
-}
+    events();
+};
 
 init();
+
